@@ -24,4 +24,7 @@ jobs:
       run: docker build . --file Dockerfile --tag peaners95/node-hello-world:$(date +%s)
       
     - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/peaners95/node-hello-world
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: peaners95/node-hello-world:latest, peaners95/node-hello-world:${{ github.run_number }}
